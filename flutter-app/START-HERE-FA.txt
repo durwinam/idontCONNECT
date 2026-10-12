@@ -1,0 +1,9 @@
+idontCONNECT Windows build — شروع سریع
+
+این فایل یک سورس سفارشی‌شده است، نه فایل EXE از پیش کامپایل‌شده. برای گرفتن برنامه:
+1) این پروژه را در مخزن GitHub خودت قرار بده یا workflow را به مخزن موردنظر اضافه کن.
+2) در GitHub > Actions، اجرای «idontCONNECT Windows Release Test» را اجرا/بررسی کن.
+3) بعد از موفقیت، از بخش Artifacts فایل idontCONNECT-Windows-x64-test را دانلود کن.
+4) ZIP را استخراج و FlClash.exe را اجرا کن؛ نام پنجره و آیکون با idontCONNECT برند شده‌اند.
+
+این شاخه از موتور mihomo/Clash.Meta استفاده می‌کند چون سورس مرجع FlClash بر همین اساس است؛ این نسخه Xray نیست. برای پشتیبانی از Xray باید یک adapter/core جداگانه طراحی شود. اتصال و TUN در سیستم واقعی نیاز به تست با دسترسی‌های مناسب ویندوز دارد.
