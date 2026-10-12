@@ -1,0 +1,122 @@
+<Window x:Class="IdontConnect.Windows.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="idontCONNECT" Height="790" Width="1240" MinHeight="680" MinWidth="1000"
+        Background="{StaticResource BgBrush}" WindowStartupLocation="CenterScreen">
+  <Grid Margin="22">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+      <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+
+    <Grid Grid.Row="0" Margin="0,0,0,18">
+      <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+      <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+        <Border Width="42" Height="42" CornerRadius="13" Background="#FF102C40" BorderBrush="{StaticResource AccentBrush}" BorderThickness="1">
+          <TextBlock Text="i+" Foreground="{StaticResource AccentBrush}" FontSize="22" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Border>
+        <StackPanel Margin="13,0,0,0" VerticalAlignment="Center">
+          <TextBlock Text="idontCONNECT" Foreground="{StaticResource TextBrush}" FontSize="24" FontWeight="SemiBold"/>
+          <TextBlock Text="WINDOWS • X-RAY CORE" Foreground="{StaticResource MutedBrush}" FontSize="10" Margin="1,3,0,0"/>
+        </StackPanel>
+      </StackPanel>
+      <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+        <Border Background="{StaticResource PanelBrush}" BorderBrush="#26364E" BorderThickness="1" CornerRadius="12" Padding="12,8" Margin="0,0,10,0">
+          <StackPanel Orientation="Horizontal">
+            <Ellipse Width="7" Height="7" Fill="#FFFFC857" VerticalAlignment="Center"/>
+            <TextBlock x:Name="HeaderStatus" Text="Disconnected" Foreground="{StaticResource MutedBrush}" Margin="8,0,0,0"/>
+          </StackPanel>
+        </Border>
+        <Button Content="Import profile" Click="Import_Click"/>
+      </StackPanel>
+    </Grid>
+
+    <Grid Grid.Row="1">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="1.1*"/>
+        <ColumnDefinition Width="1.8*"/>
+      </Grid.ColumnDefinitions>
+
+      <Border Grid.Column="0" Background="{StaticResource PanelBrush}" BorderBrush="#253149" BorderThickness="1" CornerRadius="20" Padding="20" Margin="0,0,14,0">
+        <DockPanel>
+          <StackPanel DockPanel.Dock="Top">
+            <TextBlock Text="CONNECTION" Foreground="{StaticResource MutedBrush}" FontSize="11" FontWeight="SemiBold"/>
+            <TextBlock x:Name="SelectedName" Text="No server selected" Foreground="{StaticResource TextBrush}" FontSize="21" FontWeight="SemiBold" Margin="0,12,0,4" TextWrapping="Wrap"/>
+            <TextBlock x:Name="SelectedEndpoint" Text="Import a VLESS, VMess, Trojan or Shadowsocks link" Foreground="{StaticResource MutedBrush}" FontSize="12" TextWrapping="Wrap"/>
+          </StackPanel>
+
+          <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,24">
+            <Grid Width="210" Height="210">
+              <Ellipse Stroke="#2229D9FF" StrokeThickness="1" Margin="0"/>
+              <Ellipse Stroke="#4029D9FF" StrokeThickness="1" Margin="13"/>
+              <Ellipse Stroke="#6629D9FF" StrokeThickness="2" Margin="27"/>
+              <Ellipse Fill="#FF102238" Stroke="{StaticResource AccentBrush}" StrokeThickness="1.5" Margin="42"/>
+              <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock Text="i+" Foreground="{StaticResource AccentBrush}" FontSize="48" FontWeight="Bold" HorizontalAlignment="Center"/>
+                <TextBlock x:Name="ConnectionLabel" Text="READY" Foreground="{StaticResource MutedBrush}" FontSize="10" FontWeight="SemiBold" HorizontalAlignment="Center"/>
+              </StackPanel>
+            </Grid>
+            <Button x:Name="ConnectButton" Content="Connect" Width="190" Height="46" Margin="0,22,0,0" Background="#FF0E3C50" BorderBrush="{StaticResource AccentBrush}" Click="Connect_Click"/>
+            <TextBlock x:Name="ConnectionHint" Text="VPN tunnel integration is not enabled in this foundation." Foreground="{StaticResource MutedBrush}" FontSize="11" TextWrapping="Wrap" TextAlignment="Center" Width="250" Margin="0,12,0,0"/>
+          </StackPanel>
+
+          <StackPanel DockPanel.Dock="Bottom">
+            <Border Background="{StaticResource PanelAltBrush}" CornerRadius="12" Padding="12">
+              <Grid>
+                <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                <StackPanel>
+                  <TextBlock Text="SESSION TRAFFIC" Foreground="{StaticResource MutedBrush}" FontSize="10"/>
+                  <TextBlock Text="Live counters will appear after telemetry integration" Foreground="{StaticResource TextBrush}" FontSize="12" Margin="0,5,0,0" TextWrapping="Wrap"/>
+                </StackPanel>
+                <TextBlock Grid.Column="1" Text="—" Foreground="{StaticResource AccentBrush}" FontSize="24" VerticalAlignment="Center"/>
+              </Grid>
+            </Border>
+          </StackPanel>
+        </DockPanel>
+      </Border>
+
+      <Grid Grid.Column="1">
+        <Grid.RowDefinitions><RowDefinition Height="1.15*"/><RowDefinition Height="0.85*"/></Grid.RowDefinitions>
+        <Border Grid.Row="0" Background="{StaticResource PanelBrush}" BorderBrush="#253149" BorderThickness="1" CornerRadius="20" Padding="18" Margin="0,0,0,14">
+          <DockPanel>
+            <StackPanel DockPanel.Dock="Top" Margin="0,0,0,12">
+              <TextBlock Text="SERVER PROFILES" Foreground="{StaticResource TextBrush}" FontSize="16" FontWeight="SemiBold"/>
+              <TextBlock Text="Your imported configurations stay on this device" Foreground="{StaticResource MutedBrush}" FontSize="11" Margin="0,4,0,0"/>
+            </StackPanel>
+            <ListBox x:Name="ProfilesList" Background="Transparent" BorderThickness="0" Foreground="{StaticResource TextBrush}" SelectionChanged="ProfilesList_SelectionChanged">
+              <ListBox.ItemTemplate>
+                <DataTemplate>
+                  <Border Background="#FF151F31" CornerRadius="10" Padding="12" Margin="0,0,0,8" BorderBrush="#26364E" BorderThickness="1">
+                    <Grid>
+                      <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                      <StackPanel>
+                        <TextBlock Text="{Binding Name}" Foreground="{StaticResource TextBrush}" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock Text="{Binding Protocol}" Foreground="{StaticResource AccentBrush}" FontSize="10" Margin="0,4,0,0"/>
+                        <TextBlock Text="{Binding Address}" Foreground="{StaticResource MutedBrush}" FontSize="11" Margin="0,3,0,0"/>
+                      </StackPanel>
+                      <TextBlock Grid.Column="1" Text="{Binding Port}" Foreground="{StaticResource MutedBrush}" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                    </Grid>
+                  </Border>
+                </DataTemplate>
+              </ListBox.ItemTemplate>
+            </ListBox>
+          </DockPanel>
+        </Border>
+
+        <Border Grid.Row="1" Background="{StaticResource PanelBrush}" BorderBrush="#253149" BorderThickness="1" CornerRadius="20" Padding="18">
+          <DockPanel>
+            <TextBlock DockPanel.Dock="Top" Text="DIAGNOSTICS" Foreground="{StaticResource TextBrush}" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,10"/>
+            <TextBox x:Name="LogBox" IsReadOnly="True" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" FontFamily="Consolas" FontSize="11" BorderThickness="0" Background="#FF0B111D"/>
+          </DockPanel>
+        </Border>
+      </Grid>
+    </Grid>
+
+    <Grid Grid.Row="2" Margin="0,16,0,0">
+      <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+      <TextBlock Text="Windows 10 / 11  •  Source foundation" Foreground="{StaticResource MutedBrush}" FontSize="11" VerticalAlignment="Center"/>
+      <TextBlock Grid.Column="1" Text="Real connection and TUN support are still under development" Foreground="#FFFFC857" FontSize="11" VerticalAlignment="Center"/>
+    </Grid>
+  </Grid>
+</Window>
