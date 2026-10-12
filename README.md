@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # idontCONNECT v1.0.0 — Professional source foundation
 
 Android VPN client source built with Kotlin, Jetpack Compose, Material 3, DataStore, a layered package structure, and a fail-closed Xray integration boundary.
@@ -33,3 +34,6 @@ Or run the included GitHub Actions workflow, which installs JDK/Android SDK/Grad
 ## Native engine integration gate
 
 Read `docs/ARCHITECTURE.md` and `docs/RESEARCH.md` before implementing the native bridge. Pin a dated libXray release and matching Xray-core version, generate the Android artifact using the official build script, verify the API and ABIs, then implement TUN FD handoff, socket protection, DNS setup/reset, start/stop, and real metrics polling. Do not mark the VPN connected until the engine reports a verified running state.
+=======
+# idontCONNECT
+>>>>>>> origin/main
