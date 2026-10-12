@@ -1,0 +1,74 @@
+name: idontCONNECT Windows Release Test
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - "lib/**"
+      - "assets/**"
+      - "windows/**"
+      - "plugins/**"
+      - "core/**"
+      - "pubspec.yaml"
+      - "pubspec.lock"
+      - "setup.dart"
+      - ".github/workflows/windows-release-test.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: idontconnect-windows-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-windows:
+    runs-on: windows-2022
+    timeout-minutes: 90
+    steps:
+      - name: Checkout source and submodules
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Enable Git long paths
+        shell: pwsh
+        run: git config --global core.longpaths true
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.26.4'
+          cache-dependency-path: core/go.sum
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: '3.47.4'
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build Windows release
+        run: flutter build windows --release
+
+      - name: Verify release bundle
+        shell: pwsh
+        run: |
+          $exe = "build/windows/x64/runner/Release/FlClash.exe"
+          if (!(Test-Path $exe)) { throw "Windows executable not found: $exe" }
+          Get-ChildItem "build/windows/x64/runner/Release" | Select-Object Name, Length
+
+      - name: Upload Windows test bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: idontCONNECT-Windows-x64-test
+          path: build/windows/x64/runner/Release/**
+          if-no-files-found: error
+          retention-days: 14
