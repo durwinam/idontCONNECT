@@ -1,0 +1,12 @@
+idontCONNECT v1.0.0 — professional source rebuild status
+
+Source: rewritten from the original monolithic scaffold into dedicated app, core/model, data, domain, engine, telemetry, VPN, UI, and feature packages.
+Formatting: .editorconfig added for UTF-8, LF, four-space indentation, and Kotlin official style.
+Localization: six complete resource sets checked for matching keys (English, Persian, Russian, Chinese, Spanish, German); RTL follows the selected or system language.
+Profile UX: link/JSON text import, bounded file import (2 MiB), clipboard paste, QR scanning wiring, duplicate detection, persisted selection/favorites/folders.
+Tests: parser unit tests added. XML syntax and localization-key parity checks passed in this environment. Kotlin compiler parsing showed no syntax diagnostics, but dependency resolution was unavailable.
+Android APK: NOT BUILT / NOT VERIFIED.
+Reason: Android SDK and Gradle are not installed in the authoring environment, and external network access is unavailable.
+Native Xray integration: NOT COMPLETE. XrayEngine defaults to unavailable; VpnService fails closed. No fake connection or fake traffic is emitted.
+Subscription fetching/refresh, live Xray metrics, smart server scoring, Network Health, Kill Switch enforcement, Split Tunneling rules, and sanitized diagnostics export require implementation and device-level tests.
+CI workflow: configured to run unit tests and assemble a debug APK on GitHub Actions.
